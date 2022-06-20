@@ -4,13 +4,13 @@ class ApplicationController < ActionController::Base
   include CartsHelper
   
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username])
   end
 
   def authenticate_admin
     unless current_user.admin?
-      flash[:alert] = "Not allow!"
+      flash[:alert] = "你沒有權限 !"
       redirect_to root_path
     end
   end

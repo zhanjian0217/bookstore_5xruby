@@ -13,7 +13,7 @@ class CartsController < ApplicationController
     current_cart.remove_item(params[:id])
     session[:mycart] = current_cart.serialize
 
-    redirect_to cart_path, notice: "已加入購物車"
+    redirect_to cart_path, notice: "已成功刪除"
   end
 
   def destroy
