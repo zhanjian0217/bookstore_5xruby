@@ -1,0 +1,7 @@
+<%= simple_form_for product, url: admin_products_path do |f| %>
+  <%= f.input :title, label: "書名", placeholder: "商品名稱" %>
+  <%= f.input :description, label: "書本簡介", placeholder: "說明" %>
+  <%= f.input :price, label: "售價", placeholder: "售價" %>
+  <%= f.submit class: "btn btn-default btn-primary" %>
+<% end %>
+
