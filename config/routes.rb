@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products do 
     end
-    resources :coupons do 
+    resources :coupons, only: [:index, :new, :create, :destroy] do 
     end
   end
 
@@ -14,10 +14,24 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show] do 
   end
   
-  resource :cart, only:[:show, :destroy] do
+  resource :cart, only: [:show, :destroy] do
     collection do
       post :add, path:'add/:id'
       delete :remove, path:'remove/:id'
+      post :mycoupon
+    end
+  end
+
+  resources :coupons, only: [:index, :update] do
+    collection do 
+      get :my_coupons
+    end 
+  end
+  
+  resources :orders, only: [] do
+    collection do
+      get :payment
+      post :payment_response
     end
   end
 end

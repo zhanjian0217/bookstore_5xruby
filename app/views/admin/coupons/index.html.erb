@@ -1,4 +1,4 @@
-<h1>折價券列表</h1>
+<h1>折價券列表(後台)</h1>
 
 
 <%= link_to '新增折價券', new_admin_coupon_path, class: "btn btn-default btn-primary" %>
@@ -9,6 +9,9 @@
       <td>折價券名稱</td>
       <td>折價</td>
       <td>折價券代碼</td>
+      <td>使用狀態</td>
+      <td>是否被領用</td>
+      <td>其他</td>
     </tr>
   </thead>
   <tbody>
@@ -17,9 +20,11 @@
       <td>
         <%= coupon.title %>
       </td>
-      <td class="text-primary text-lg"><%= coupon.price %></td>
+      <td class="text-primary text-lg"><%= coupon.discount %></td>
+      <td><%= coupon.code %></td>
+      <td><%= coupon.status == "unused" ? "未使用" : "已使用" %></td>
+      <td><%= coupon.user.nil? ? "尚未被領用" : coupon.user.username %></td>
       <td>
-        <%= link_to '編輯', edit_admin_coupon_path(coupon), class: "btn btn-xs btn-warning" %>
         <%= link_to '刪除', admin_coupon_path(coupon), method: "delete", data: { confirm: "確定刪除?" }, class: "btn btn-xs btn-danger" %>
       </td>
     </tr>

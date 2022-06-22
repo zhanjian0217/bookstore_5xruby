@@ -1,4 +1,5 @@
 class Cart
+
   attr_reader :items
 
   def initialize(items = [])
@@ -33,7 +34,11 @@ class Cart
       { product_id: item.product_id, quantity: item.quantity }
     }
 
-    { items: all_items }
+    if { items: all_items } == { items: [] }
+      nil
+    else
+      { items: all_items }
+    end
   end
 
   def self.from_hash(hash)

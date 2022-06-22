@@ -1,6 +1,15 @@
-<% flash.each do |type, message| %>
-  <div data-controller="flash" class="flash flash-<%= type %>">
-    <div><%= message %></div>
-    <%# <button id="flashCloseBtn" data-action="click->flash#close">X</button> %>
+<div class="position-fixed z-index-3 start-50 translate-middle-x">
+  <div
+    data-controller="notification"
+    data-notification-delay-value="1500"
+    class="duration-1000"
+  >
+    <% flash.each do |type, message| %>
+      <% if type == "alert" %>
+        <div class="btn btn-danger"><%= message %></div>
+      <% else %>
+        <div class="btn btn-success"><%= message %></div>
+      <% end %>
+    <% end %>
   </div>
-<% end %>
+</div>

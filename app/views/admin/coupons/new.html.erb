@@ -1,0 +1,7 @@
+<%= simple_form_for @coupon, url: admin_coupons_path do |f| %>
+  <%= f.input :title, label: "名稱", placeholder: "折價券名稱" %>
+  <%= f.input :discount, label: "折扣", placeholder: "售價" %>
+  <%= f.input :code, label: "優惠碼", input_html: {value: f.object.code || SecureRandom.base64(8)} %>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
+
