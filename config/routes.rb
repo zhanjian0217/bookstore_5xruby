@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   # front stage
-  resources :products, only: %i[index show] do
+  resources :products, only: %i[index] do
   end
 
   resource :cart, only: %i[show destroy] do
@@ -28,11 +28,12 @@ Rails.application.routes.draw do
   end
 
   resources :coupons, only: %i[index update] do
-    collection do
-      get :my_coupons
-    end
   end
-
+  get :mycoupons, to: 'coupons#mycoupons'
+  
+  
+  
+  get :myorders, to: 'orders#myorders'
   resources :orders, only: [] do
     collection do
       get :payment

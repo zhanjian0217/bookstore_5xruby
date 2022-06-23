@@ -33,6 +33,11 @@ class OrdersController < BaseController
     end
   end
 
+  def myorders
+    @orders = current_user.orders
+  end
+
+
   private
 
   def auto_sign_in

@@ -16,7 +16,7 @@ class CouponsController < BaseController
     end
   end
 
-  def my_coupons
+  def mycoupons
     @my_coupons = current_user.coupons.unused
   end
 

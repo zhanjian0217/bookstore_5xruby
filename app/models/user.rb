@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   # relationship
   has_many :coupons
+  has_many :orders
 
   def admin?
     role == 'admin'
