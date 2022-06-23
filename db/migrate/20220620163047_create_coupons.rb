@@ -8,6 +8,7 @@ class CreateCoupons < ActiveRecord::Migration[6.1]
       t.integer :discount
       t.string :status, default: 'unused'
       t.integer :user_id
+      t.integer :order_id
       t.datetime :start_time, default: -> { 'NOW()' }
       t.datetime :end_time
 

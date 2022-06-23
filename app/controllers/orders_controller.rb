@@ -10,6 +10,7 @@ class OrdersController < BaseController
     if trade_info.status == 'SUCCESS'
       @order = Order.find_by(slug: trade_info.order_no)
       @order.pay!
+      @order.coupon.use!
       redirect_to root_path
     else
       redirect_to root_path, alert: '購買失敗，請確認有正確填寫付款資訊'
@@ -18,12 +19,12 @@ class OrdersController < BaseController
 
   def payment
     my_coupon = current_user.coupons.find_by(code: session[:my_coupon])
-    my_coupon.update(status: "used") if my_coupon
-
     @total_price = current_cart.total_price
     @total_price = session[:discount_price] if session[:discount_price]
+
     @order = Order.new(total_price: @total_price, user: current_user, slug: SecureRandom.hex(5))
     @order.total_price = session[:discount_price] if session[:discount_price]
+    @order.coupon = my_coupon if my_coupon
 
     if @order.save
       @form_info = Newebpay::Mpg.new(@order).form_info

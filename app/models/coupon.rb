@@ -4,6 +4,7 @@ class Coupon < ApplicationRecord
   include AASM
   # relationship
   belongs_to :user, optional: true
+  belongs_to :order, optional: true
 
 
   aasm column: 'status' do
