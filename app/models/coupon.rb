@@ -16,7 +16,7 @@ class Coupon < ApplicationRecord
     end
 
     event :expire do
-      transitions from: [:unused, :expired], to: :expired
+      transitions from: [:used, :expired], to: :expired
     end
   end
 
