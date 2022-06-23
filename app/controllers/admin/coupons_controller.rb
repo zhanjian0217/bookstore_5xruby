@@ -1,36 +1,39 @@
-class Admin::CouponsController < ApplicationController
-  before_action :find_coupon, only: [:destroy]
-  before_action :authenticate_user!   
-  before_action :authenticate_admin 
+# frozen_string_literal: true
 
-  def index
-    @coupons = Coupon.all
-  end
+module Admin
+  class CouponsController < Admin::BaseController
+    before_action :find_coupon, only: [:destroy]
 
-  def new
-    @coupon = Coupon.new
-  end
-
-  def create
-    @coupon = Coupon.new(coupon_params)
-    if @coupon.save
-      redirect_to admin_coupons_path, notice: "新增折價券成功！"
-    else
-      redner :new
+    def index
+      @coupons = Coupon.ordered
     end
-  end
 
-  def destroy
-    @coupon.destroy
-    redirect_to admin_coupons_path, alert: "刪除折價券成功！"
-  end
+    def new
+      @coupon = Coupon.new
+    end
 
-  private
-  def coupon_params
-    params.require(:coupon).permit(:title, :discount, :code)
-  end
+    def create
+      @coupon = Coupon.new(coupon_params)
+      if @coupon.save
+        redirect_to admin_coupons_path, notice: '新增折價券成功！'
+      else
+        redner :new
+      end
+    end
 
-  def find_coupon
-    @coupon = Coupon.find(params[:id])
+    def destroy
+      @coupon.destroy
+      redirect_to admin_coupons_path, alert: '刪除折價券成功！'
+    end
+
+    private
+
+    def coupon_params
+      params.require(:coupon).permit(:title, :discount, :code)
+    end
+
+    def find_coupon
+      @coupon = Coupon.find(params[:id])
+    end
   end
 end

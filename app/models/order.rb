@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   include AASM
 
-  aasm column: "status" do
+  aasm column: 'status' do
     state :pending, initial: true
     state :paid
 
@@ -10,6 +12,6 @@ class Order < ApplicationRecord
     end
   end
 
-  # relationship 
+  # relationship
   belongs_to :user
 end

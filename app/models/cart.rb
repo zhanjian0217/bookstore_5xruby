@@ -1,5 +1,6 @@
-class Cart
+# frozen_string_literal: true
 
+class Cart
   attr_reader :items
 
   def initialize(items = [])
@@ -30,9 +31,9 @@ class Cart
   end
 
   def serialize
-    all_items = items.map { |item| 
+    all_items = items.map do |item|
       { product_id: item.product_id, quantity: item.quantity }
-    }
+    end
 
     if { items: all_items } == { items: [] }
       nil
@@ -45,8 +46,8 @@ class Cart
     if hash.nil?
       new []
     else
-      new hash["items"].map { |item_hash|
-        CartItem.new(item_hash["product_id"], item_hash["quantity"])
+      new hash['items'].map { |item_hash|
+        CartItem.new(item_hash['product_id'], item_hash['quantity'])
       }
     end
   end

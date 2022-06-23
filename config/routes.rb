@@ -1,33 +1,35 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root "products#index"
+  root 'products#index'
   devise_for :users
 
   # back stage
   namespace :admin do
-    resources :products do 
+    resources :products do
     end
-    resources :coupons, only: [:index, :new, :create, :destroy] do 
+    resources :coupons, only: %i[index new create destroy] do
     end
   end
 
   # front stage
-  resources :products, only: [:index, :show] do 
+  resources :products, only: %i[index show] do
   end
-  
-  resource :cart, only: [:show, :destroy] do
+
+  resource :cart, only: %i[show destroy] do
     collection do
-      post :add, path:'add/:id'
-      delete :remove, path:'remove/:id'
+      post :add, path: 'add/:id'
+      delete :remove, path: 'remove/:id'
       post :mycoupon
     end
   end
 
-  resources :coupons, only: [:index, :update] do
-    collection do 
+  resources :coupons, only: %i[index update] do
+    collection do
       get :my_coupons
-    end 
+    end
   end
-  
+
   resources :orders, only: [] do
     collection do
       get :payment
