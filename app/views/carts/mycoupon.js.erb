@@ -1,2 +1,7 @@
-document.getElementById("totalPrice").textContent = <%= @total_price %>
-document.getElementById("CouponTitle").textContent = '<%= @coupon.title %>'
+<% if @coupon.user != current_user || @coupon.status == "used" %>
+  document.getElementById("CouponTitle").textContent = "無效的折價券"
+  document.getElementById("code").value = ""
+<% else %>
+  document.getElementById("totalPrice").textContent = <%= @total_price %>
+  document.getElementById("CouponTitle").textContent = '<%= @coupon.title %>'
+<% end %>

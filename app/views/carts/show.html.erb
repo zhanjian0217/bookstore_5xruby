@@ -35,7 +35,7 @@
 <%= link_to '繼續選購', products_path, class: "btn btn-default" %>
 <a href="orders/payment" class="btn btn-primary <%= cart_empty? %>" role="button" aria-disabled="true">結帳</a>
 
-<%= form_with(scope: "coupon", data: { remote: true }, url: mycoupon_cart_path) do |form| %>
+<%= form_with(data: { remote: true }, url: mycoupon_cart_path) do |form| %>
   <%= form.label :code, "輸入優惠券代碼" %>
   <%= form.text_field :code %>
   <%= form.submit "確定" %>

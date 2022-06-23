@@ -4,6 +4,7 @@
     <%= form.text_field :TradeInfo, value: @form_info[:TradeInfo] %>
     <%= form.text_field :TradeSha, value: @form_info[:TradeSha] %>
     <%= form.text_field :Version, value: @form_info[:Version] %>
+
   </div>
 
 <table class="table table-hover">
@@ -28,7 +29,7 @@
   <tfoot>
     <tr>
       <td colspan="3">總計</td>
-      <td><%= @total_price %></td>
+      <td><%= current_cart.total_price %></td>
     </tr>  
   </tfoot>
 </table>

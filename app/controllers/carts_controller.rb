@@ -24,8 +24,15 @@ class CartsController < ApplicationController
   end
 
   def mycoupon
-    @coupon = Coupon.find_by(code: params[:coupon][:code])
-    @total_price = current_cart.total_price
-    @total_price = @total_price - @coupon.discount
+    @total_price = current_cart.total_price 
+    if (@coupon = Coupon.find_by!(code: params[:code]))
+      @total_price -= @coupon.discount
+      @total_price = 1 if @total_price <= 0 
+      session[:discount_price] = @total_price
+      session[:my_coupon] = @coupon.code
+    else
+      @total_price
+    end
   end
+
 end
