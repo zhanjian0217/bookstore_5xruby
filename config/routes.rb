@@ -3,6 +3,9 @@
 Rails.application.routes.draw do
   root 'products#index'
   devise_for :users
+  devise_scope :user do
+    post "users/sign_up", to: "devise/registrations#create"
+  end
 
   # back stage
   namespace :admin do
