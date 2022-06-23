@@ -17,7 +17,7 @@ module Admin
       if @coupon.save
         redirect_to admin_coupons_path, notice: '新增折價券成功！'
       else
-        redner :new
+        render :new
       end
     end
 
@@ -29,7 +29,7 @@ module Admin
     private
 
     def coupon_params
-      params.require(:coupon).permit(:title, :discount, :code)
+      params.require(:coupon).permit(:title, :discount, :code, :end_time)
     end
 
     def find_coupon

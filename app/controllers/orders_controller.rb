@@ -10,14 +10,16 @@ class OrdersController < BaseController
     if trade_info.status == 'SUCCESS'
       @order = Order.find_by(slug: trade_info.order_no)
       @order.pay!
-      redirect_to cart_path
+      redirect_to root_path
     else
       redirect_to root_path, alert: '購買失敗，請確認有正確填寫付款資訊'
     end
   end
 
   def payment
-    current_user.coupons.find_by(code: session[:my_coupon]).update(status: 'used')
+    my_coupon = current_user.coupons.find_by(code: session[:my_coupon])
+    my_coupon.update(status: "used") if my_coupon
+
     @total_price = current_cart.total_price
     @total_price = session[:discount_price] if session[:discount_price]
     @order = Order.new(total_price: @total_price, user: current_user, slug: SecureRandom.hex(5))
@@ -34,6 +36,7 @@ class OrdersController < BaseController
 
   def auto_sign_in
     sign_in @order.user
+    flash[:notice] = "購買成功"
   end
 
   def session_clear

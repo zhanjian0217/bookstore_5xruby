@@ -1,4 +1,4 @@
-<% if @coupon.user != current_user || @coupon.status == "used" %>
+<% if @coupon.user != current_user || @coupon.status == "used" || @coupon.status == "expired" %>
   document.getElementById("CouponTitle").textContent = "無效的折價券"
   document.getElementById("code").value = ""
 <% else %>

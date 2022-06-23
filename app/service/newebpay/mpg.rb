@@ -35,7 +35,7 @@ module Newebpay
       info[:LoginType] = 0
 
       # 選填欄位
-      info[:ReturnURL] = 'https://7105-114-44-230-140.jp.ngrok.io/orders/payment_response'
+      info[:ReturnURL] = "https://#{ENV['host_name']}/orders/payment_response"
       info[:NotifyURL] = ''
       info[:Email] = order.user.email
       info[:CREDIT] = 1

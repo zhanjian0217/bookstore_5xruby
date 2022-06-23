@@ -12,6 +12,16 @@ zh-TW:
               too_short: "密碼太短"
             password_confirmation:
               confirmation: "請確認信箱"
+        coupon:
+          attributes:
+            title: 
+              blank: 不得空白    
+            discount: 
+              blank: 不得空白    
+        product:
+          attributes:
+            title: 
+              blank: 不得空白    
     attributes:
       user:
         confirmation_sent_at: 確認信已寄於
